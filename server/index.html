@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    <button class="post">MAKE POST</button>
+    <button class="get">MAKE GET</button>
+    <button class="id">MAKE GET BY ID</button>
+    <button class="put">MAKE PUT</button>
+    <button class="delete">MAKE DELETE</button>
+</body>
+<script>
+    const button = document.querySelector('.post');
+    const buttonGET = document.querySelector('.get');
+    const buttonPUT = document.querySelector('.put');
+    const buttonDELETE = document.querySelector('.delete');
+
+    button.addEventListener('click', () => {
+        console.log('1');
+        const options = {
+            method: 'post',
+            headers: {'Content-Type': 'application/json', 'Origin': 'http://localhost:3001'},
+            body: JSON.stringify({id: 3, name: 'Stanislav'})
+        };
+
+        fetch('http://localhost:3001/users/add', options)
+            .then(reponse => reponse.text())
+            .then(data => console.log(data));
+
+    });
+
+    buttonGET.addEventListener('click', () => {
+        console.log('2');
+        const options = {
+            method: 'get',
+            headers: {'Content-Type': 'application/json', 'Origin': 'http://localhost:3001'}
+        };
+
+        fetch('http://localhost:3001/users', options)
+            .then(reponse => reponse.json())
+            .then(data => console.log(data));
+    });
+
+    buttonPUT.addEventListener('click', () => {
+        console.log('3');
+        const options = {
+            method: 'put',
+            headers: {'Content-Type': 'application/json', 'Origin': 'http://localhost:3001'},
+            body: JSON.stringify({id: 2, name: 'HER MAN'})
+        };
+
+        fetch('http://localhost:3001/users/2', options)
+            .then(reponse => reponse.text())
+            .then(data => console.log(data));
+    });
+
+    buttonDELETE.addEventListener('click', () => {
+        console.log('4');
+        const options = {
+            method: 'delete',
+            headers: {'Content-Type': 'application/json', 'Origin': 'http://localhost:3001'}
+        };
+
+        fetch('http://localhost:3001/users/2', options)
+            .then(reponse => reponse.text())
+            .then(data => console.log(data));
+    })
+</script>
+</html>
